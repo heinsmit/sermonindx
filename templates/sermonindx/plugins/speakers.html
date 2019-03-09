@@ -1,0 +1,11 @@
+{% load cms_tags %}
+<div class="plugin-speaker-list plugin-block">
+	<div class="plugin-heading">
+  		<h3>Speakers</h3>
+  	</div>
+  <ul>
+    {% for speaker in speakers %}
+    <li><a href="{% url 'sermonindx:speaker_sermons_list' slug=speaker.speaker_slug %}">{{ speaker.si_name }} {{ speaker.si_surname }}</a></li>
+    {% endfor %}
+  </ul>
+</div>

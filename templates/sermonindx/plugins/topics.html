@@ -1,0 +1,11 @@
+plugin-block{% load cms_tags %}
+<div class="plugin-topics-list plugin-block">
+	<div class="plugin-heading">
+  		<h3>Topics</h3>
+  	</div>
+  <ul>
+    {% for topic in topics %}
+    <li><a href="{% url 'sermonindx:topic_sermons_list' slug=topic.topic_slug %}">{{ topic.si_topic }}</a></li>
+    {% endfor %}
+  </ul>
+</div>

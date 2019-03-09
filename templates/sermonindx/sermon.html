@@ -1,0 +1,18 @@
+{% extends 'sermonindx/base.html' %}
+{% load cms_tags %}
+
+{% block sermonindx_content %}
+  <div class="sermon-exerpt">
+    <h3><strong>{{ sermon.si_title }}</strong></h3>
+    <ul>
+      <li><b>Datum:</b> {{ sermon.si_date|date:"d/m/Y" }}</li>
+      <li><b>Spreeker:</b> <a href="{% url 'sermonindx:speaker_sermons_list' slug=sermon.si_speaker.speaker_slug %}">{{ sermon.si_speaker.si_slug }}</a></li>
+    </ul>
+    <audio controls>
+      <source src="{{ sermon.file_src.url }}" type="audio/mpeg">
+    </audio>
+    <p><a href="{{ sermon.file_src.url }}" download>Download Sermon</a></p>
+    <p><span><b>Bybel vers:</b> </span>{{ sermon.si_bible_verse }}</p>
+    <p>{{ sermon.si_text }}</p>
+  </div>
+{% endblock %}

@@ -1,0 +1,16 @@
+{% load cms_tags %}
+
+<div class="sermon-detail">
+  <h2>{{ instance.sermon.si_title }}</h2>
+  <ul>
+    <li><span><b>Datum:</b> </span>{{ instance.sermon.si_date }}</li>
+    <li><span><b>Spreuker:</b> </span>{{ instance.sermon.si_speaker }} {{ intance.sermon.si_surname }}</li>
+  </ul>
+  <audio controls>
+    <source src="{{ instance.sermon.file_src.url }}" type="audio/mpeg">
+  </audio>
+  <p><span><b>Bybel vers:</b> </span>{{ instance.sermon.si_bible_verse }}</p>
+  <p>
+    {{ instance.sermon.si_text }}
+  </p>
+</div>

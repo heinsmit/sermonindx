@@ -1,0 +1,45 @@
+{% extends 'sermonindx/base.html' %}
+{% load cms_tags %}
+
+{% block sermonindx_content %}
+  <div class="row">
+    <div class="col s12">
+      <span>Sermons by topic: {{ topic.si_topic }}</span>
+    </div>
+  </div>
+
+  {% for sermon in sermons %}
+  <div class="sermon-exerpt">
+    <h3><strong><a href="{% url 'sermonindx:sermon_detail' slug=sermon.si_slug %}">{{ sermon.si_title }}</a></strong></h3>
+    <ul class="">
+      <li><b>Datum:</b> {{ sermon.si_date|date:"d/m/Y" }}</li>
+      <li><b>Spreeker:</b> <a href="{% url 'sermonindx:speaker_sermons_list' slug=sermon.si_speaker.speaker_slug %}">{{ sermon.si_speaker }}</a></li>
+    </ul>
+    <p>{{ sermon.si_text|truncatewords_html:100 }}</p>
+    <div><span><a href="{% url 'sermonindx:sermon_detail' slug=sermon.si_slug %}" class="">Luister</a></span></div>
+  </div>
+  {% endfor %}
+
+
+  <ul class="pagination">
+    {% if sermons.has_previous %}
+      <li class=""><a href="?page={{ sermons.previous_page_number }}"><i class="material-icons">chevron_left</i></a></li>
+    {% else %}
+    <li class="disabled"><a href="#!"><i class="material-icons">chevron_left</i></a></li>
+    {% endif %}
+
+    {% for num in num_pages %}
+      {% if forloop.counter == sermons.number %}
+        <li class="active"><a href="?page={{ forloop.counter }}">{{ forloop.counter }}</a></li>
+      {% else %}
+        <li class=""><a href="?page={{ forloop.counter }}">{{ forloop.counter }}</a></li>
+      {% endif %}
+    {% endfor %}
+
+    {% if sermons.has_next %}
+      <li class=""><a href="?page={{ sermons.next_page_number }}"><i class="material-icons">chevron_right</i></a></li>
+    {% else %}
+    <li class="disabled"><a href="#!"><i class="material-icons">chevron_right</i></a></li>
+    {% endif %}
+  </ul>
+{% endblock %}
